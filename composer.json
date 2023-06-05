@@ -1,0 +1,19 @@
+{
+    "name": "webstdy/greeter",
+    "description": "Greeter - A simple Laravel package",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Webstdy\\Greeter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hossamghoneim",
+            "email": "hossamghoneim11@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
