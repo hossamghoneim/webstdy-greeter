@@ -30,3 +30,11 @@ Publish assets:
 php artisan vendor:publish
 ```
 
+Put this code in footer:
+```
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
+<script src="{{ asset('js/dashboard/listen-to-firebase-notification.js') }}"></script>
+```
+
