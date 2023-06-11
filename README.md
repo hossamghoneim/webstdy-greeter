@@ -30,7 +30,7 @@ Publish assets:
 php artisan vendor:publish
 ```
 
-Create js file and set configurations in it:
+Create js file, set configurations in it and put it in public folder: 
 ```javascript 
 /*
 Give the service worker access to Firebase Messaging.
