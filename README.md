@@ -12,22 +12,32 @@ Install wia composer:
 composer require Webstdy/firebase-notification
 ```
 
-And add the service provider in config/app.php:
+Make a helper function to collect notification data:
 
 ```php
-Yk\LaravelPackageExample\LaravelPackageExampleProvider::class,
-```
+function storeAndPushNotification($titleAr, $titleEn, $descriptionAr, $descriptionEn, $icon, $color, $url)
+{
+    /* add notification to first Employee */
+    $date = Carbon::now()->diffForHumans();
+    $notification = new NewNotification($titleAr, $titleEn, $descriptionAr, $descriptionEn, $date, $icon, $color, $url);
+    $admin = Employee::first(); //use the model you want, in my case i'm using Employee Model
+    $admin->notify($notification);
 
-Then register Facade class aliase:
+    /* push notifications to all admins */
+    $firebaseToken = Employee::whereNotNull('device_token')->pluck('device_token')->all();
+    $SERVER_API_KEY = ""; //use your server api key
 
-```php
-'FacadeExample' => Yk\LaravelPackageExample\Facades\FacadeExample::class,
-```
+    $data = [
+        "registration_ids" => $firebaseToken,
+        "notification" => [
+          // return the data you want
+        ]
+    ];
 
-Publish assets:
-
-```
-php artisan vendor:publish
+    return Http::withHeaders([
+        "Authorization" => "key=$SERVER_API_KEY",
+    ])->post('https://fcm.googleapis.com/fcm/send', $data);
+}
 ```
 
 Create js file, set configurations in it and put it in public folder: 
