@@ -1,9 +1,5 @@
 # Webstdy Firebase Notification
 
-- Load controllers
-- Load views
-- Register migrations
-
 ### Installation
 
 Install wia composer:
@@ -37,6 +33,16 @@ function storeAndPushNotification($titleAr, $titleEn, $descriptionAr, $descripti
     return Http::withHeaders([
         "Authorization" => "key=$SERVER_API_KEY",
     ])->post('https://fcm.googleapis.com/fcm/send', $data);
+}
+```
+
+Make a notification controller to use notification actions:
+
+```php
+//example
+public function markAsRead($id)
+{
+    return $this->notificationActions->markAsRead(new Employee, $id);
 }
 ```
 
